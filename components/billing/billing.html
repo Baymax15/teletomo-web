@@ -1,0 +1,56 @@
+<div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-2">
+  <div ng-repeat="bill in bills" class="col d-flex">
+    <div class="card flex-stretch">
+      <div class="card-body row row-cols-2">
+        <h5 class="card-title col-8">${{bill.price}}</h5>
+        <span class="col-4 text-end">
+          <button type="button" class="btn-close" ng-click="removeBill(bill.reference)"></button>
+        </span>
+        <span class="card-text col-3">Mode:</span>
+        <span class="card-text col-9">{{bill.paymentMode}}</span>
+        <span class="card-text col-3">ref:</span>
+        <span class="card-text col-9">{{bill.reference}}</span>
+      </div>
+    </div>
+  </div>
+  <div class="col ms-md-auto d-flex align-self-end justify-content-center justify-content-sm-end">
+    <button type="button" class="custom btn btn-accent" data-bs-toggle="modal" data-bs-target="#add-bill-modal">Add
+      bill</button>
+  </div>
+</div>
+
+<div class="modal fade" id="add-bill-modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add bill</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text">$</span>
+            <div class="form-floating">
+              <input type="number" class="form-control" id="price" ng-model="addBillForm.price" placeholder="Price">
+              <label for="price">Price</label>
+            </div>
+          </div>
+          <div class="form-floating mb-3">
+            <select class="form-select" id="paymentMode" ng-model="addBillForm.paymentMode">
+              <option selected disabled value="">Select payment Mode from options</option>
+              <option value="Coupon">Coupon</option>
+              <option value="Debit Card">Debit Card</option>
+              <option value="Google Pay">Google Pay</option>
+              <option value="Referral">Referral</option>
+            </select>
+            <label for="paymentMode">PaymentMode</label>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-click="addBill()">Add bill</button>
+      </div>
+    </div>
+  </div>
+</div>

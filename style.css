@@ -1,0 +1,73 @@
+.custom {
+    --accent: #51ccbf;
+    --accent-shade1: #48B7AB;
+    --accent-shade2: #40A398;
+}
+
+.bg-accent {
+    background: var(--accent);
+}
+
+.fg-accent {
+    color: var(--accent);
+}
+
+.link-accent {
+    color: var(--accent);
+    transition: color 500ms;
+}
+
+.link-accent:hover {
+    color: var(--accent-shade1);
+}
+
+.link-accent:active {
+    color: var(--accent-shade2);
+}
+
+.btn-accent {
+    color: #212529;
+    background-color: var(--accent);
+    border-color: var(--accent-shade1);
+}
+
+.btn-accent:hover {
+    color: #212529;
+    background: var(--accent-shade1);
+    border-color: var(--accent-shade2);
+}
+
+.btn-accent:active,
+.btn-accent:first-child:active {
+    color: #212529;
+    background: var(--accent-shade1);
+    border-color: var(--accent-shade2);
+}
+
+.btn-accent:focus,
+.btn-accent.focus {
+    border-color: var(--accent-shade2);
+    box-shadow: 0 0 0 .15rem rgba(48, 122, 114, .5);
+}
+
+.btn-accent.disabled,
+.btn-accent:disabled {
+    color: #212529;
+    background-color: #307A72;
+    border-color: #307A72;
+}
+
+.btn-accent:not(:disabled):not(.disabled):active,
+.btn-accent:not(:disabled):not(.disabled).active,
+.show>.btn-accent.dropdown-toggle {
+    color: #212529;
+    background-color: var(--accent-shade2);
+    border-color: var(--accent-shade2);
+}
+
+.btn-accent:not(:disabled):not(.disabled):active:focus,
+.btn-accent:not(:disabled):not(.disabled).active:focus,
+.show>.btn-accent.dropdown-toggle:focus {
+    border-color: var(--accent-shade2);
+    box-shadow: 0 0 0 .15rem rgba(48, 122, 114, 0.5);
+}

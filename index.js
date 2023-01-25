@@ -1,37 +1,20 @@
-const app = angular.module('teletomo', []);
-const baseUrl = 'http://localhost:8080/';
+const app = angular.module('teletomo', ['ui.router']);
 
-app.controller('IndexController', function ($scope, $http) {
-  $scope.destinations = {
-    selected: "",
-    endpoints: [],
-  }
+app.config(function ($stateProvider, $locationProvider) {
+  $locationProvider.html5Mode(true);
 
-  $scope.sendMessage = function () {
-    const message = $scope.msg;
-    const destination = $scope.destinations.selected;
-    if (message && destination) {
-      $http.post(baseUrl + destination, {message})
-        .then(function successCallback(response) {
-          console.log(response);
-          $scope.response = response.data.response;
-        }, function errorCallback(err) {
-          console.log(err);
-        });
-    }
-  }
+  // An array of state definitions
+  var states = [
+    { name: 'home', url: '/', component: 'home' },
+    { name: 'billing', url: '/billing', component: 'billing' },
+    { name: 'email', url: '/email', component: 'email' },
+    { name: 'inventory', url: '/inventory', component: 'inventory' },
+    { name: 'sms', url: '/sms', component: 'sms' },
+    { name: 'voicemail', url: '/voicemail', component: 'voicemail' },
+  ]
 
-  $scope.toTitleCase = function(inp) {
-    return `${ inp.charAt(0).toUpperCase() }${ inp.substring(1) }`;
-  }
-
-
-  function getDestinations() {
-    $http.get(baseUrl).then(function (response) {
-      $scope.destinations.endpoints = response.data;
-    }, function (error) {
-      console.log(error);
-    });
-  }
-  getDestinations();
+  // Loop over the state definitions and register them
+  states.forEach(function (state) {
+    $stateProvider.state(state);
+  });
 });
