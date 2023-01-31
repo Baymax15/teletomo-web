@@ -1,11 +1,12 @@
 angular.module('teletomo').component('header', {
   templateUrl: 'components/header/header.html',
-  controller: function ($scope, $rootScope) {
+  controller: function ($scope, $rootScope, $cookies) {
     $scope.setTheme = setTheme;
-    
+    $scope.theme = $cookies.get('theme') || 'light';
+
     setTheme();
     function setTheme() {
-      console.log($scope)
+      $cookies.put('theme', $scope.theme);
       $rootScope.theme = $scope.theme;
     }
   }

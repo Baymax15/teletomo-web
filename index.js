@@ -1,4 +1,4 @@
-const app = angular.module('teletomo', ['ui.router']);
+const app = angular.module('teletomo', ['ui.router', 'ngCookies']);
 
 app.config(function ($stateProvider, $locationProvider) {
   $locationProvider.html5Mode(true);
