@@ -1,19 +1,24 @@
-<div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-2">
-  <div ng-repeat="bill in bills" class="col d-flex">
+<div class="row  g-2">
+  <!-- row-cols-1 row-cols-sm-2 row-cols-md-3 -->
+  <div ng-repeat="bill in bills" class="col-12 col-sm-6 col-md-4 d-flex">
     <div class="card flex-stretch">
-      <div class="card-body row row-cols-2">
+      <div class="card-body row">
         <h5 class="card-title col-8">${{bill.price}}</h5>
-        <span class="col-4 text-end">
+        <span class="text-end col-4">
           <button type="button" class="btn-close" ng-click="removeBill(bill.reference)"></button>
         </span>
-        <span class="card-text col-3">Mode:</span>
-        <span class="card-text col-9">{{bill.paymentMode}}</span>
-        <span class="card-text col-3">ref:</span>
-        <span class="card-text col-9">{{bill.reference}}</span>
+        <div class="card-text border rounded-top">
+          <span class="col-3 border-end pe-2 d-inline-block">Mode</span>
+          <span class="col-8 d-inline-block">{{bill.paymentMode}}</span>
+        </div>
+        <div class="card-text border rounded-bottom">
+          <span class="col-3 d-inline-block">Ref.</span>
+          <span class="col-8 d-inline-block text-truncate">{{bill.reference}}</span>
+        </div>
       </div>
     </div>
   </div>
-  <div class="col ms-md-auto d-flex align-self-end justify-content-center justify-content-sm-end">
+  <div class="col-12 d-flex justify-content-end">
     <button type="button" class="custom btn btn-accent" data-bs-toggle="modal" data-bs-target="#add-bill-modal">Add
       bill</button>
   </div>
