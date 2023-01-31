@@ -1,1 +1,56 @@
-'email' 
+<div class="container-lg">
+    <div class="row m-1 rounded border" ng-repeat="email in emails">
+        <div class="py-1 col-1 d-inline-block"><i class="fs-4 fa fa-envelope"></i></div>
+        <div class="py-1 col-3 d-inline-block text-truncate">{{email.sender}}</div>
+        <div class="py-1 col-3 d-inline-block text-truncate">{{email.subject}}</div>
+        <div class="py-1 col-4 d-inline-block text-truncate">{{email.message}}</div>
+        <div class="py-1 col-1 d-inline-block">
+            <button type="button" class="btn-close" ng-click="removeEmail(email.id)"></button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12  d-flex justify-content-end">
+            <button type="button" class="custom btn btn-accent" data-bs-toggle="modal"
+                data-bs-target="#add-email-modal" id="init">Compose</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="add-email-modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Compose</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-floating mb-3 d-flex">
+                        <div ng-class="'m-1 px-2 badge text-bg-' + invertTheme" ng-repeat="eid in addEmailForm.recipients">
+                        <span>{{eid}}</span>
+                        <i class="fa fa-times" ng-click="removeRecipient(eid)"></i>
+                        </div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="recipients" ng-model="addEmailForm.q"
+                            placeholder="Recipients" ng-keypress="addRecipient($event)">
+                        <label for="recipients">Add Recipients</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="subject" ng-model="addEmailForm.subject"
+                            placeholder="Subject">
+                        <label for="subject">Subject</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="message" ng-model="addEmailForm.message"
+                            placeholder="Message">
+                        <label for="message">Message</label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="addEmail()">Add Email</button>
+            </div>
+        </div>
+    </div>
+</div>
