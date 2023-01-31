@@ -1,0 +1,22 @@
+<nav class="container-md navbar navbar-expand-sm">
+    <div class="container-fluid">
+        <a class="navbar-brand" ui-sref="home">Teletomo</a>
+        <label class="custom switch ms-auto me-2 order-sm-last" data-toggle="tooltip" title="Toggle Theme">
+            <input type="checkbox" ng-model="theme" ng-true-value="'dark'" ng-false-value="'light'" ng-change="setTheme()">
+            <span class="custom slider round"></span>
+          </label>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-inner"
+            aria-controls="navbar-inner" aria-expanded="false" aria-label="Toggle navigation bar">
+            <span class="navbar-toggler-icon navbar-toggler-icon-dark"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar-inner">
+            <div class="navbar-nav">
+                <a class="nav-link" ui-sref="billing" ui-sref-active="active">Billing</a>
+                <a class="nav-link" ui-sref="email" ui-sref-active="active">Email</a>
+                <a class="nav-link" ui-sref="inventory" ui-sref-active="active">Inventory</a>
+                <a class="nav-link" ui-sref="sms" ui-sref-active="active">Sms</a>
+                <a class="nav-link" ui-sref="voicemail" ui-sref-active="active">Voicemail</a>
+            </div>
+        </div>
+    </div>
+</nav>

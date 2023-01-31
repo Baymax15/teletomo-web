@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="teletomo" class="h-100" data-bs-theme="dark">
+<html lang="en" ng-app="teletomo" class="h-100" data-bs-theme="{{theme}}">
 
 <head>
     <meta charset="UTF-8">
@@ -31,53 +31,16 @@
     <script src="components/inventory/inventory.js"></script>
     <script src="components/sms/sms.js"></script>
     <script src="components/voicemail/voicemail.js"></script>
+    <script src="components/header/header.js"></script>
+    <script src="components/footer/footer.js"></script>
     <title>Teletomo</title>
 </head>
 
 <body class="h-100 d-flex flex-column">
     <header class="custom bg-accent mb-auto" data-bs-theme="light">
-        <nav class="container-md navbar navbar-expand-lg">
-            <div class="container-fluid">
-                <a class="navbar-brand" ui-sref="home">Teletomo</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-inner"
-                    aria-controls="navbar-inner" aria-expanded="false" aria-label="Toggle navigation bar">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbar-inner">
-                    <div class="navbar-nav">
-                        <a class="nav-link" ui-sref="billing" ui-sref-active="active">Billing</a>
-                        <a class="nav-link" ui-sref="email" ui-sref-active="active">Email</a>
-                        <a class="nav-link" ui-sref="inventory" ui-sref-active="active">Inventory</a>
-                        <a class="nav-link" ui-sref="sms" ui-sref-active="active">Sms</a>
-                        <a class="nav-link" ui-sref="voicemail" ui-sref-active="active">Voicemail</a>
-                    </div>
-                </div>
-            </div>
-        </nav>
     </header>
     <ui-view class="container-md flex-grow-1 my-2"></ui-view>
-    <footer class="mt-auto text-body bg-body border-top border-secondary" data-bs-theme="dark">
-        <div class="container-lg">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
-                <div>
-                    <div class="display-4 text-muted">Teletomo</div>
-                    <small class="text-muted">© Teletomo 2023 all rights reserved</small>
-                </div>
-                <ul class="nav flex-column">
-                    <li class="nav-item"><a href="#" class="nav-link link-secondary">Help &amp; Support</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link link-secondary">Terms &amp; Conditions</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link link-secondary">Privacy policy</a></li>
-                </ul>
-                <div>
-                    <div class="fs-5 ps-2 text-muted">Follow us on</div>
-                    <div class="d-flex py-2">
-                        <span><a href="#" class="fg-accent"><i class="fs-4 px-2 fa-brands fa-facebook"></a></i></span>
-                        <span><a href="#" class="fg-accent"><i class="fs-4 px-2 fa-brands fa-twitter"></a></i></span>
-                        <span><a href="#" class="fg-accent"><i class="fs-4 px-2 fa-brands fa-instagram"></a></i></span>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <footer class="text-body bg-body border-top border-secondary" data-bs-theme="dark">
     </footer>
 </body>
 
