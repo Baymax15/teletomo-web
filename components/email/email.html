@@ -1,17 +1,22 @@
 <div class="container-lg">
-    <div class="row m-1 rounded border" ng-repeat="email in emails">
-        <div class="py-1 col-1 d-inline-block"><i class="fs-4 fa fa-envelope"></i></div>
-        <div class="py-1 col-3 d-inline-block text-truncate">{{email.sender}}</div>
-        <div class="py-1 col-3 d-inline-block text-truncate">{{email.subject}}</div>
-        <div class="py-1 col-4 d-inline-block text-truncate">{{email.message}}</div>
-        <div class="py-1 col-1 d-inline-block">
-            <button type="button" class="btn-close" ng-click="removeEmail(email.id)"></button>
+    <div class="mb-1 d-flex flex-row position-relative border rounded" ng-repeat="email in emails">
+        <span class="ms-2 pe-2 d-flex align-items-center justify-content-center border-end">
+            <a class="stretched-link text-reset text-decoration-none fa fa-envelope" href="#"></a>
+        </span>
+        <div class="flex-grow-1 mx-1 row">
+            <div class="col col-lg-4 text-truncate">{{email.sender}}</div>
+            <div class="col col-lg-8 text-truncate text-muted">{{email.subject}}</div>
+            <div class="d-none d-lg-block col-lg-12 text-truncate text-muted">{{email.message}}</div>
+        </div>
+        <div class="d-none px-2 me-2 d-md-flex flex-row flex-lg-column">
+            <small class="order-lg-last text-end">{{email.dateTime | date : 'dd-MMM-yy' }}</small>
+            <small class="ps-md-2 ps-lg-0 text-end">{{email.dateTime | date : 'h:mm a' }}</small>
         </div>
     </div>
     <div class="row">
-        <div class="col-12  d-flex justify-content-end">
+        <div class="col mx-1 d-flex justify-content-end">
             <button type="button" class="custom btn btn-accent" data-bs-toggle="modal"
-                data-bs-target="#add-email-modal" id="init">Compose</button>
+                data-bs-target="#add-email-modal">Create Mail</button>
         </div>
     </div>
 </div>
@@ -20,29 +25,30 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Compose</h5>
+                <h5 class="modal-title">Create Mail</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
                 <form>
                     <div class="form-floating mb-3 d-flex">
-                        <div ng-class="'m-1 px-2 badge text-bg-' + invertTheme" ng-repeat="eid in addEmailForm.recipients">
-                        <span>{{eid}}</span>
-                        <i class="fa fa-times" ng-click="removeRecipient(eid)"></i>
+                        <div ng-class="'m-1 px-2 badge text-bg-' + invertTheme"
+                            ng-repeat="recipient in addEmail.data.recipients">
+                            <span>{{recipient}}</span>
+                            <i class="fa fa-times" ng-click="removeRecipient(recipient)"></i>
                         </div>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="recipients" ng-model="addEmailForm.q"
+                        <input type="email" class="form-control" id="recipients" ng-model="addEmail.query"
                             placeholder="Recipients" ng-keypress="addRecipient($event)">
                         <label for="recipients">Add Recipients</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="subject" ng-model="addEmailForm.subject"
+                        <input type="text" class="form-control" id="subject" ng-model="addEmail.data.subject"
                             placeholder="Subject">
                         <label for="subject">Subject</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="message" ng-model="addEmailForm.message"
+                        <input type="text" class="form-control" id="message" ng-model="addEmail.data.message"
                             placeholder="Message">
                         <label for="message">Message</label>
                     </div>

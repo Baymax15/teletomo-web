@@ -1,16 +1,27 @@
 angular.module('teletomo').component('email', {
   templateUrl: 'components/email/email.html',
-  controller: function ($http, $scope, $rootScope) {
+  controller: function (EmailService, $scope, $rootScope) {
     $scope.invertTheme = $rootScope.theme == 'dark' ? 'light' : 'dark';
+
+    $scope.addEmail = {
+      modal: new bootstrap.Modal('#add-email-modal'),
+      data: { recipients: [] }
+    } 
+
+    $scope.addEmail = createEmail;
+    $scope.removeEmail = removeEmail;
+    $scope.addRecipient = addRecipient;
+    $scope.removeRecipient = removeRecipient;
+
     loadEmails();
-    // bootstrap modal from bootstrap cdn
-    let modal = new bootstrap.Modal('#add-email-modal');
-    $scope.addEmailForm = {
-      recipients: []
+    function loadEmails() {
+      EmailService.getAllEmail().then(emails => {
+        $scope.emails = emails;
+      });
     }
 
-    $scope.addEmail = function () {
-      const request = $scope.addEmailForm;
+    function createEmail() {
+      const request = $scope.addEmail.data;
       const email = {
         sender: 'User@teletomo.com',
         recipients: request.recipients,
@@ -19,50 +30,35 @@ angular.module('teletomo').component('email', {
         message: request.message,
       }
 
-      createEmail(email);
-      modal.hide();
+      EmailService.createEmail(email).then(emails => {
+        $scope.emails = emails;
+        $scope.addEmail.data = { recipients: [] }
+        $scope.addEmail.modal.hide();
+      });
     }
 
-    $scope.removeEmail = function (id) {
-      deleteEmail(id);
+    function removeEmail(id) {
+      EmailService.deleteEmail(id).then(isRemoved => {
+        if (!isRemoved) return;
+        const index = $scope.emails.find(mail => mail.id === id);
+        $scope.emails.splice(index, 1);
+        console.log('remove email');
+      });
     }
 
-    $scope.addRecipient = function($event) {
-      if ($scope.addEmailForm.q && $event.code == 'Enter') {
-        let recipient = $scope.addEmailForm.q.trim().toLowerCase();
-        if (!$scope.addEmailForm.recipients.includes(recipient)) {
-          $scope.addEmailForm.recipients.push(recipient);
+    function addRecipient($event) {
+      if ($scope.addEmail.query && $event.code == 'Enter') {
+        let recipient = $scope.addEmail.query.trim().toLowerCase();
+        if (!$scope.addEmail.data.recipients.includes(recipient)) {
+          $scope.addEmail.data.recipients.push(recipient);
         }
-        $scope.addEmailForm.q = '';
+        $scope.addEmail.query = '';
       }
     }
 
-    $scope.removeRecipient = function(eid) {
-      const index = $scope.addEmailForm.recipients.indexOf(eid);
-      $scope.addEmailForm.recipients.splice(index, 1);
-    }
-
-
-
-    function createEmail(Email) {
-      $http.post("http://localhost:8080/email", Email).then(
-        (res) => { $scope.emails = res.data.emails },
-        (err) => { console.error(err) }
-      )
-    }
-
-    function deleteEmail(id) {
-      $http.delete(`http://localhost:8080/email/${id}`).then(
-        (res) => { if (res.data.data) loadEmails() },
-        (err) => { console.error(err); }
-      )
-    }
-
-    function loadEmails() {
-      $http.get("http://localhost:8080/email",).then(
-        (res) => { $scope.emails = res.data.emails; console.log($scope.emails); },
-        (err) => { console.error(err) }
-      );
+    function removeRecipient(eid) {
+      const index = $scope.addEmail.data.recipients.indexOf(eid);
+      $scope.addEmail.data.recipients.splice(index, 1);
     }
   }
 });
