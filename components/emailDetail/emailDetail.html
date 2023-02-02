@@ -1,0 +1,33 @@
+<div class="container-lg border">
+    <div class="mx-4 my-3 d-flex">
+        <a class="text-muted" id="trash-tooltip" data-bs-toggle="tooltip" data-bs-title="Delete mail" ng-click="emailDetail.remove()">
+            <i class="fa fa-trash-can"></i>
+        </a>
+        <a class="btn-close ms-auto" ui-sref="email"></a>
+    </div>
+    <div class="row mx-2 my-3">
+        <div class="col-1"><span>From</span></div>
+        <div class="col-11"><span ng-bind="emailDetail.data.sender"></span></div>
+    </div>
+    <div class="row mx-2 my-3">
+        <div class="col-1"><span>To</span></div>
+        <div class="col-11"><span class="me-1" ng-repeat="r in emailDetail.data.recipients">&lt;{{r}}&gt;</span></div>
+    </div>
+    <div class="row mx-2 my-3">
+        <div class="col-1"><span>Subject</span></div>
+        <div class="col-11"><span ng-bind="emailDetail.data.subject"></span></div>
+    </div>
+    <div class="row mx-2 my-3 card">
+        <div class="col-12 card-body"><span ng-bind="emailDetail.data.message"></span></div>
+    </div>
+</div>
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="deleted" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <strong class="me-auto">Teletomo</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">Successfully deleted</div>
+    </div>
+</div>

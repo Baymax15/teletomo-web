@@ -1,7 +1,7 @@
 <div class="container-lg">
     <div class="mb-1 d-flex flex-row position-relative border rounded" ng-repeat="email in emails">
         <span class="ms-2 pe-2 d-flex align-items-center justify-content-center border-end">
-            <a class="stretched-link text-reset text-decoration-none fa fa-envelope" href="#"></a>
+            <a class="stretched-link text-reset text-decoration-none fa fa-envelope" ui-sref="emailDetail({id: email.id})"></a>
         </span>
         <div class="flex-grow-1 mx-1 row">
             <div class="col col-lg-4 text-truncate">{{email.sender}}</div>
