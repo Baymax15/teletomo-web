@@ -151,3 +151,11 @@ input:checked+.slider:before {
 .modal .badge {
     --bs-badge-font-weight: 500;
 }
+
+.bg-card {
+    background-color: var(--bs-gray-300);
+}
+
+[data-bs-theme="dark"] .bg-card {
+    background-color: var(--bs-gray-700);
+}
