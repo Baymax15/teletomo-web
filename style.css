@@ -159,3 +159,20 @@ input:checked+.slider:before {
 [data-bs-theme="dark"] .bg-card {
     background-color: var(--bs-gray-700);
 }
+
+.flex-row > .card-header {
+    padding: var(--bs-card-cap-padding-x) var(--bs-card-cap-padding-y);
+    border-right: var(--bs-card-border-width) solid var(--bs-card-border-color);
+    margin-right: 0;
+    border-bottom: initial;
+    margin-bottom: initial;
+    flex-shrink: 1;
+}
+
+.flex-row > .card-header:first-child {
+    border-radius: var(--bs-card-inner-border-radius) 0 0 var(--bs-card-inner-border-radius);
+}
+
+.min-width-0 {
+    min-width: 0;
+}

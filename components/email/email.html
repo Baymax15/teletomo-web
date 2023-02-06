@@ -1,16 +1,19 @@
 <div class="container-lg">
-    <div class="mb-1 d-flex flex-row position-relative border rounded" ng-repeat="email in emails">
-        <span class="ms-2 pe-2 d-flex align-items-center justify-content-center border-end">
-            <a class="stretched-link text-reset text-decoration-none fa fa-envelope" ui-sref="emailDetail({id: email.id})"></a>
-        </span>
-        <div class="flex-grow-1 mx-1 row">
-            <div class="col col-lg-4 text-truncate">{{email.sender}}</div>
-            <div class="col col-lg-8 text-truncate text-muted">{{email.subject}}</div>
-            <div class="d-none d-lg-block col-lg-12 text-truncate text-muted">{{email.message}}</div>
+    <div class="mb-1 card bg-card flex-row position-relative" ng-repeat="email in emails">
+        <div class="card-header d-flex align-items-center">
+            <a class="text-reset stretched-link text-decoration-none" ui-sref="emailDetail({id: email.id})">
+                <i class="fs-4 fa fa-envelope"></i>
+            </a>
         </div>
-        <div class="d-none px-2 me-2 d-md-flex flex-row flex-lg-column">
-            <small class="order-lg-last text-end">{{email.dateTime | date : 'dd-MMM-yy' }}</small>
-            <small class="ps-md-2 ps-lg-0 text-end">{{email.dateTime | date : 'h:mm a' }}</small>
+        <div class="mx-2 row min-width-0 align-items-center flex-grow-1">
+            <div class="col-5 text-truncate" ng-bind="email.sender"></div>
+            <div class="col-7 text-truncate" ng-bind="email.subject"></div>
+            <div class="d-none d-lg-block col-12 text-truncate text-muted" ng-bind="email.message"></div>
+        </div>
+        <div
+            class="d-none px-2 d-md-flex flex-row flex-lg-column align-items-md-center justify-content-lg-center ms-auto">
+            <small class="order-lg-last text-nowrap" ng-bind="email.dateTime | date:'dd-MMM-yy'"></small>
+            <small class="ps-md-2 ps-lg-0 text-nowrap" ng-bind="email.dateTime | date:'h:mm a'"></small>
         </div>
     </div>
     <div class="row">
@@ -33,7 +36,7 @@
                     <div class="form-floating mb-3 d-flex">
                         <div ng-class="'m-1 px-2 badge text-bg-' + invertTheme"
                             ng-repeat="recipient in addEmail.data.recipients">
-                            <span>{{recipient}}</span>
+                            <span ng-bind="recipient"></span>
                             <i class="fa fa-times" ng-click="removeRecipient(recipient)"></i>
                         </div>
                     </div>

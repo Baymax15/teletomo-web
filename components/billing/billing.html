@@ -2,15 +2,15 @@
   <div ng-repeat="bill in bills" class="col-12 col-sm-6 col-lg-4">
     <div class="card flex-stretch custom bg-card shadow-sm">
       <div class="card-header d-flex justify-content-between">
-        <h2 class="card-title mb-0">${{bill.price}}</h2>
+        <h2 class="card-title mb-0" ng-bind="bill.price | currency:'$':0"></h2>
         <button type="button" class="btn-close" ng-click="removeBill(bill.reference)"></button>
       </div>
       <div class="card-body">
         <div class="row">
           <span class="col-3">Mode</span>
-          <span class="col-9">{{bill.paymentMode}}</span>
+          <span class="col-9" ng-bind="bill.paymentMode"></span>
           <span class="col-3">Ref.</span>
-          <span class="col-9 text-truncate">{{bill.reference}}</span>
+          <span class="col-9 text-truncate" ng-bind="bill.reference"></span>
         </div>
       </div>
     </div>

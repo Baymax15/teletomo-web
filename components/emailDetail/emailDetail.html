@@ -11,7 +11,11 @@
     </div>
     <div class="row mx-2 my-3">
         <div class="col-1"><span>To</span></div>
-        <div class="col-11"><span class="me-1" ng-repeat="r in emailDetail.data.recipients">&lt;{{r}}&gt;</span></div>
+        <div class="col-11">
+            <span class="me-1" ng-repeat="recipient in emailDetail.data.recipients">
+                &lt;<span ng-bind="recipient"></span>&gt;
+            </span>
+        </div>
     </div>
     <div class="row mx-2 my-3">
         <div class="col-1"><span>Subject</span></div>
