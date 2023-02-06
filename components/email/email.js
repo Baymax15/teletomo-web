@@ -42,7 +42,6 @@ angular.module('teletomo').component('email', {
         if (!isRemoved) return;
         const index = $scope.emails.find(mail => mail.id === id);
         $scope.emails.splice(index, 1);
-        console.log('remove email');
       });
     }
 
