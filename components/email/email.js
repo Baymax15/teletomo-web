@@ -8,7 +8,7 @@ angular.module('teletomo').component('email', {
       data: { recipients: [] }
     } 
 
-    $scope.addEmail = createEmail;
+    $scope.createEmail = createEmail;
     $scope.removeEmail = removeEmail;
     $scope.addRecipient = addRecipient;
     $scope.removeRecipient = removeRecipient;
@@ -26,7 +26,7 @@ angular.module('teletomo').component('email', {
         sender: 'User@teletomo.com',
         recipients: request.recipients,
         subject: request.subject,
-        dateTime: new Date().toISOString().replace('Z', ''),
+        dateTime: new Date().toISOString(),
         message: request.message,
       }
 
