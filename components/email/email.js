@@ -2,11 +2,12 @@ angular.module('teletomo').component('email', {
   templateUrl: 'components/email/email.html',
   controller: function (EmailService, $scope, $rootScope) {
     $scope.invertTheme = $rootScope.theme == 'dark' ? 'light' : 'dark';
+    const data = { recipients: [], subject: '', message: '' }
 
     $scope.addEmail = {
       modal: new bootstrap.Modal('#add-email-modal'),
-      data: { recipients: [] }
-    } 
+      data: angular.copy(data)
+    }
 
     $scope.createEmail = createEmail;
     $scope.removeEmail = removeEmail;
@@ -22,17 +23,22 @@ angular.module('teletomo').component('email', {
 
     function createEmail() {
       const request = $scope.addEmail.data;
+      if (!request.subject || !request.message) {
+        // missing subject or message, 
+        // addEmail button is disabled so shouldn't happen normally
+        return;
+      }
       const email = {
         sender: 'User@teletomo.com',
         recipients: request.recipients,
-        subject: request.subject,
+        subject: request.subject.trim(),
         dateTime: new Date().toISOString(),
-        message: request.message,
+        message: request.message.trim(),
       }
 
       EmailService.createEmail(email).then(emails => {
         $scope.emails = emails;
-        $scope.addEmail.data = { recipients: [] }
+        $scope.addEmail.data = angular.copy(data);
         $scope.addEmail.modal.hide();
       });
     }

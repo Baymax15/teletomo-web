@@ -32,7 +32,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form name="form">
                     <div class="form-floating mb-3 d-flex">
                         <div ng-class="'m-1 px-2 badge text-bg-' + invertTheme"
                             ng-repeat="recipient in addEmail.data.recipients">
@@ -46,19 +46,22 @@
                         <label for="recipients">Add Recipients</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="subject" ng-model="addEmail.data.subject"
-                            placeholder="Subject">
+                        <input type="text" class="form-control" id="subject" name="subject"
+                            ng-class="{'is-invalid' : form.subject.$invalid && form.subject.$dirty }"
+                            ng-model="addEmail.data.subject" placeholder="Subject" required>
                         <label for="subject">Subject</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="message" ng-model="addEmail.data.message"
-                            placeholder="Message">
+                        <input type="text" class="form-control" id="message" name="message"
+                            ng-class="{'is-invalid' : form.message.$invalid && form.message.$dirty }"
+                            ng-model="addEmail.data.message" placeholder="Message" required>
                         <label for="message">Message</label>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" ng-click="createEmail()">Add Email</button>
+                <button type="button" class="btn btn-primary" ng-click="createEmail($event)"
+                    ng-disabled="form.$invalid">Add Email</button>
             </div>
         </div>
     </div>
